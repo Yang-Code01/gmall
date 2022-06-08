@@ -14,3 +14,8 @@
 > - gulimall-**member**
 > - gulimall-**order**
 > - gulimall-**product**
+> - gulimall-**ware**
+> - gulimall-**common**
+
+#### 基本环境搭建完成
+
