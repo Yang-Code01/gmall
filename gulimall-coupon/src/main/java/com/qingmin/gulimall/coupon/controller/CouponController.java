@@ -31,6 +31,18 @@ public class CouponController {
     @Autowired
     private CouponService couponService;
 
+
+
+
+    // 测试openfeign远程调用
+    @RequestMapping("/member")
+    public R getCoupon(){
+        CouponEntity coupon = new CouponEntity();
+        coupon.setCouponName("这是一个优惠券");
+
+        return R.ok().put("coupon",coupon);
+    }
+
     /**
      * 列表
      */

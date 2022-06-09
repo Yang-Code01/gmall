@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.qingmin.gulimall.member.feign.CouponFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +28,46 @@ import com.qingmin.gulimall.common.utils.R;
  * @email sunlightcs@gmail.com
  * @date 2022-06-08 15:09:14
  */
+@RefreshScope
 @RestController
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    CouponFeignService couponFeignService;
+
+    @Value("${member.user.name}")
+    private String name;
+    @Value("${member.user.age}")
+    private String age;
+
+    /**
+     * testConfig
+     */
+    @RequestMapping("/config")
+    public R configTest(){
+        return R.ok().put("name",name).put("age",age);
+    }
+
+
+    /**
+     * test feign
+     */
+    @RequestMapping("/coupons")
+    public R test(){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("张三");
+        R coupon = couponFeignService.getCoupon();
+        // put 的第二个是通过openfeign远程调用查询得到的c
+        return R.ok().put("member",memberEntity).put("coupon",coupon.get("coupon"));
+
+    }
+
+
+
+
 
     /**
      * 列表
