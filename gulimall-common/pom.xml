@@ -27,8 +27,12 @@
     <name>gulimall-common</name>
     <description>每一个微服务公共的依赖，bean，工具类</description>
 
+    <properties>
+        <spring.cloud-version>Hoxton.SR9</spring.cloud-version>
+    </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -86,16 +90,25 @@
         </dependency>
 
 
+
+
     </dependencies>
 
 
-<!-- 引入 SpringCloud Alibaba -->
+<!-- 引入 SpringCloud Alibaba  和 springCloud-->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>2.2.7.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
