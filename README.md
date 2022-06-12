@@ -21,6 +21,10 @@
 
 
 
+
+
+
 - nacos 服务器下载安装完成
 - 配置nacos 服务注册 
 - nacos 配置中心
+- springcloud gateway 基本使用
