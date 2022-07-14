@@ -1,6 +1,7 @@
 package com.qingmin.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -31,15 +32,22 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    /**
-     * 列表
-     */
-    @RequestMapping("/list")
-    //@RequiresPermissions("product:category:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryService.queryPage(params);
 
-        return R.ok().put("page", page);
+
+    /**
+     * 查出所有分类以及子分类，以树形结构组装起来
+     * 树形结构
+     */
+    @RequestMapping("/list/tree")
+    public R list(){
+
+        System.out.println("查询分类数据");
+        List<CategoryEntity> entities = categoryService.listWithTree();
+        return R.ok().put("data", entities);
+
+//        List<CategoryEntity> categoryEntities = categoryService.list();
+//        categoryEntities.forEach(System.out::print);
+//        return R.ok().put("data",categoryEntities);
     }
 
 
